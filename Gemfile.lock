@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    vimpk (0.1.0)
+    vimpk (0.1.1)
 
 GEM
   remote: https://rubygems.org/
