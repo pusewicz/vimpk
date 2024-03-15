@@ -4,25 +4,31 @@ module VimPK
   class CLI
     include Colorizer
 
-    def initialize(args)
-      @args = args
-      @parser = VimPK::Options.new(args)
-      @options = @parser.options
+    attr_reader :command
+
+    def initialize(argv)
+      @argv = argv
+      @parser = VimPK::Options.new(argv)
+      @options = @parser.parse
       @command = determine_command
+    rescue OptionParser::MissingArgument, OptionParser::InvalidOption => e
+      puts e.message
+      abort("Use --help for usage information")
     end
 
     def call
       if @command
-        send(@command, *@args)
+        send(@command, *@argv)
       else
         puts @parser.parser
       end
     end
 
     def determine_command
-      return nil if @args.empty?
+      return nil if @argv.empty?
 
-      case @args.shift&.downcase
+      name = @argv.shift&.downcase
+      case name
       when "i", "install"
         :install_command
       when "u", "update"
@@ -30,7 +36,7 @@ module VimPK
       when "rm", "remove"
         :remove_command
       else
-        raise "Unknown command: #{name}"
+        raise ArgumentError, "Unknown command: #{name}"
       end
     end
 
