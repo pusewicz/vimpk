@@ -14,6 +14,22 @@ To use the gem, you can run the following command:
 
     $ vimpk
 
+#### Install a plugin
+
+    # Will install to the default `plugins` pack directory under `start`
+    $ vimpk install dense-analysis/ale
+
+    # Will install to the `colors` pack directory under `opt`
+    $ vimpk install sainnhe/sonokai --pack colors --opt
+
+#### Update all plugins
+
+    $ vimpk update
+
+#### Remove a plugin
+
+    $ vimpk remove ale
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
