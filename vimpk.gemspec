@@ -11,7 +11,10 @@ Gem::Specification.new do |spec|
   spec.summary = "VimPK is a tool for managing Vim plugins via packages."
   spec.homepage = "https://github.com/pusewicz/vimpk"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.0.0"
+
+  if RUBY_VERSION >= "2.7"
+    spec.required_ruby_version = ">= 2.6.0"
+  end
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
