@@ -3,7 +3,7 @@
 module VimPK
   class CLI
     def self.start(args)
-      puts "vimpk v#{VimPK::VERSION}"
+      VimPK::Update.run
     end
   end
 end
