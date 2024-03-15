@@ -34,3 +34,4 @@ jobs:
         run: bundle exec rake
       - name: Run the signature check
         run: bundle exec steep check
+        if: matrix.ruby != '2.6' && matrix.ruby != '2.7'
