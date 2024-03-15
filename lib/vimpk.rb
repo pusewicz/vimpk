@@ -12,6 +12,7 @@ module VimPK
 
   autoload :CLI, "vimpk/cli"
   autoload :Colorizer, "vimpk/colorizer"
+  autoload :Remove, "vimpk/remove"
   autoload :Git, "vimpk/git"
   autoload :Install, "vimpk/install"
   autoload :Job, "vimpk/job"

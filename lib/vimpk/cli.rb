@@ -84,6 +84,11 @@ module VimPK
         end
       end
     end
+
+    def remove_command(name = nil)
+      VimPK::Remove.new(name, @options[:path]).call
+    rescue ArgumentError, VimPK::Remove::PackageNotFound => e
+      abort colorize(e.message, color: :red)
     end
   end
 end
