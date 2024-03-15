@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir.chdir(__dir__) do
     `git ls-files -z`.split("\x0").reject do |f|
       (File.expand_path(f) == __FILE__) ||
-        f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile .standard.yml CHANGELOG.md CODE_OF_CONDUCT.md README.md Steepfile Rakefile])
+        f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile .standard.yml CHANGELOG.md CODE_OF_CONDUCT.md README.md Rakefile])
     end
   end
   spec.bindir = "exe"
