@@ -8,7 +8,7 @@ module VimPK
 
     def initialize(argv)
       @argv = argv
-      @parser = VimPK::Options.new(argv)
+      @parser = Options.new(argv)
       @options = @parser.parse
       @command = determine_command
     rescue OptionParser::MissingArgument, OptionParser::InvalidOption => e
