@@ -31,6 +31,10 @@ module VimPK
         "\e[31m#{text}\e[0m"
       when :blue
         "\e[34m#{text}\e[0m"
+      when :yellow
+        "\e[33m#{text}\e[0m"
+      else
+        raise ArgumentError, "Unknown color: #{color}"
       end
     end
   end

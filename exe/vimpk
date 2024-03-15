@@ -4,4 +4,4 @@ $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 
 require "vimpk"
 
-VimPK::CLI.start(ARGV)
+VimPK::CLI.new(ARGV).call
