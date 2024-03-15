@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "optparse"
 
 module VimPK
@@ -5,13 +7,15 @@ module VimPK
     attr_reader :options, :parser
 
     DEFAULT_PATH = File.expand_path("~/.vim/pack").freeze
-    DEFAULT_TYPE = "start".freeze
-    DEFAULT_PACK = "plugins".freeze
+    DEFAULT_TYPE = "start"
+    DEFAULT_PACK = "plugins"
 
     DefaultOptions = Struct.new(:path, :pack, :type)
 
-    def initialize(args)
+    def initialize(argv)
+      @argv = argv
       @options = DefaultOptions.new(DEFAULT_PATH, DEFAULT_PACK, DEFAULT_TYPE)
+
       @parser = OptionParser.new do |parser|
         parser.banner = "Usage: #{parser.program_name} [options] [command [options]"
         parser.separator ""
@@ -52,14 +56,12 @@ module VimPK
         parser.separator "        i|install REPO/NAME [--opt|--start] [--pack=PATH] [--path=PATH] Install a package"
         parser.separator "        u|update                                                        Update all packages"
         parser.separator "        rm|remove NAME                                                  Remove all occurrences of a package"
-
-        begin
-          parser.permute!(args)
-        rescue OptionParser::MissingArgument, OptionParser::InvalidOption => e
-          puts e.message
-          abort("Use --help for usage information")
-        end
       end
+    end
+
+    def parse
+      @parser.permute!(@argv)
+      @options
     end
   end
 end
