@@ -5,6 +5,9 @@ require "minitest/test_task"
 
 Minitest::TestTask.create
 
-require "standard/rake"
-
-task default: %i[test standard]
+if RUBY_VERSION >= "2.7"
+  require "standard/rake"
+  task default: %i[test standard]
+else
+  task default: %i[test]
+end
