@@ -35,11 +35,22 @@ module VimPK
     end
 
     def install_command(package = nil)
-      VimPK::Install.new(package, @options[:path], @options[:pack], @options[:type]).call
+      time = Time.now
+      install = Install.new(package, @options[:path], @options[:pack], @options[:type])
+      puts "Installing #{package} to #{install.dest}…"
+      install.call
+      puts colorize("Installed #{package} to #{install.dest}. Took #{Time.now - time} seconds.", color: :green)
+    rescue Git::GitError => e
+      puts colorize("Error: #{e.message}", color: :red)
+      abort e.output.lines.map { |line| "  #{line}" }.join
+    rescue Install::PackageExistsError => e
+      puts colorize("Error: #{e.message}", color: :red)
+    rescue ArgumentError => e
+      puts colorize("Error: #{e.message}", color: :red)
     end
 
     def update_command
-      update = VimPK::Update.new(@options[:path])
+      update = Update.new(@options[:path])
       puts "Updating #{update.plugins.size} packages in #{@options[:path]}…"
       start_time = Time.now
       update.call
@@ -86,7 +97,9 @@ module VimPK
     end
 
     def remove_command(name = nil)
-      VimPK::Remove.new(name, @options[:path]).call
+      Remove.new(name, @options[:path]).call
+
+      puts colorize("Package #{name} removed.", color: :green)
     rescue ArgumentError, VimPK::Remove::PackageNotFound => e
       abort colorize(e.message, color: :red)
     end
