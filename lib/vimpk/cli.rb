@@ -23,11 +23,19 @@ module VimPK
       return nil if @args.empty?
 
       case @args.shift&.downcase
+      when "i", "install"
+        :install_command
       when "u", "update"
         :update_command
+      when "rm", "remove"
+        :remove_command
       else
         raise "Unknown command: #{name}"
       end
+    end
+
+    def install_command(package = nil)
+      VimPK::Install.new(package, @options[:path], @options[:pack], @options[:type]).call
     end
 
     def update_command
