@@ -13,7 +13,7 @@ module VimPK
       @command = determine_command
     rescue OptionParser::MissingArgument, OptionParser::InvalidOption => e
       warn e.message
-      abort "Use --help for usage information"
+      abort help_message
     end
 
     def call
@@ -22,6 +22,12 @@ module VimPK
       else
         puts @parser.parser
       end
+    end
+
+    private
+
+    def help_message
+      "Use --help for usage information"
     end
 
     def determine_command
@@ -39,7 +45,7 @@ module VimPK
         :remove_command
       else
         warn colorize("Unknown command: #{name}", color: :red)
-        abort "Use --help for usage information"
+        abort help_message
       end
     end
 
