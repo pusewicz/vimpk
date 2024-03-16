@@ -3,6 +3,7 @@ module VimPK
     private
 
     def colorize_diff(line)
+      return line if ENV["NO_COLOR"]
       case line
       when /^diff --git/
         "\e[1;34m#{line}\e[0m"
@@ -24,6 +25,7 @@ module VimPK
     end
 
     def colorize(text, color: :green)
+      return text if ENV["NO_COLOR"]
       case color
       when :green
         "\e[32m#{text}\e[0m"
