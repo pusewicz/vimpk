@@ -15,10 +15,32 @@ class TestCLI < Minitest::Test
   end
 
   def test_invalid_command
-    out, _err = capture_io do
-      VimPK::CLI.new(["foo"])
+    _out, err = capture_io do
+      exception = assert_raises(SystemExit) { VimPK::CLI.new(["foo"]) }
+      assert_equal(1, exception.status)
     end
 
-    assert_equal(/Unknown command: foo/, out)
+    assert_equal(<<~ERROR, err)
+      Unknown command: foo
+      Use --help for usage information
+    ERROR
+  end
+
+  def test_call_version
+    out, _err = capture_io do
+      exception = assert_raises(SystemExit) { VimPK::CLI.new(["--version"]).call }
+      assert_equal(0, exception.status)
+    end
+
+    assert_equal("#{VimPK::VERSION}\n", out)
+  end
+
+  def test_call_help
+    out, _err = capture_io do
+      exception = assert_raises(SystemExit) { VimPK::CLI.new(["--help"]).call }
+      assert_equal(0, exception.status)
+    end
+
+    assert_match(/Usage:/, out)
   end
 end
