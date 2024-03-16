@@ -1,38 +1,44 @@
-name: Deploy
+name: Release
 
 on:
   push:
     tags:
       - v[0-9]+.[0-9]+.[0-9]+
 
+on:
+  push:
+    branches:
+      - "main" # main only
 jobs:
-  deploy:
+  release:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Update CHANGELOG
-        id: changelog
-        uses: requarks/changelog-action@v1
+      - uses: GoogleCloudPlatform/release-please-action@v4
+        id: release
         with:
-          token: ${{ github.token }}
-          tag: ${{ github.ref_name }}
-
-      - name: Create Release
-        uses: ncipollo/release-action@v1.14.0
+          release-type: ruby
+          package-name: vimpk
+          bump-minor-pre-major: true
+          version-file: "lib/vimpk/version.rb"
+      - uses: actions/checkout@v4
+        if: ${{ steps.release.outputs.release_created }}
+      - uses: ruby/setup-ruby@v1
         with:
-          allowUpdates: true
-          draft: false
-          makeLatest: true
-          name: ${{ github.ref_name }}
-          body: ${{ steps.changelog.outputs.changes }}
-          token: ${{ github.token }}
-
-      - name: Commit CHANGELOG.md
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          branch: main
-          commit_message: "docs: Update CHANGELOG.md for ${{ github.ref_name }} [skip ci]"
-          file_pattern: CHANGELOG.md
+          ruby-version: "3.3"
+          bundler-cache: true
+        if: ${{ steps.release.outputs.release_created }}
+      - name: Run tests
+        run: |
+          bin/rake
+        if: ${{ steps.release.outputs.release_created }}
+      - name: publish gem
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec
+          gem push *.gem
+        env:
+          GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
+        if: ${{ steps.release.outputs.release_created }}
