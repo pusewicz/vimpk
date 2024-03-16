@@ -44,7 +44,7 @@ module VimPK
       when "rm", "remove"
         :remove_command
       else
-        warn colorize("Unknown command: #{name}", color: :red)
+        warn colorize("Unknown command: #{name}", color: :yellow)
         abort help_message
       end
     end
@@ -56,12 +56,12 @@ module VimPK
       install.call
       puts colorize("Installed #{package} to #{install.dest}. Took #{Time.now - time} seconds.", color: :green)
     rescue Git::GitError => e
-      warn colorize("Error: #{e.message}", color: :red)
+      warn colorize("Error: #{e.message}", color: :yellow)
       abort e.output.lines.map { |line| "  #{line}" }.join
     rescue Install::PackageExistsError => e
-      warn colorize("Error: #{e.message}", color: :red)
+      abort colorize("Error: #{e.message}", color: :red)
     rescue ArgumentError => e
-      warn colorize("Error: #{e.message}", color: :red)
+      abort colorize("Error: #{e.message}", color: :red)
     end
 
     def move_command(name = nil)
