@@ -18,9 +18,25 @@ To use the gem, you can run the following command:
 
     # Will install to the default `plugins` pack directory under `start`
     $ vimpk install dense-analysis/ale
+      Installed dense-analysis/ale to /Users/johndoe/.vim/pack/plugins/start/ale. Took 0.767983 seconds.
 
     # Will install to the `colors` pack directory under `opt`
     $ vimpk install sainnhe/sonokai --pack colors --opt
+      Installed sainnhe/sonokai to /Users/johndoe/.vim/pack/colors/opt/sonokai. Took 0.844782 seconds.
+
+#### Move a plugin
+
+    # Will move to the `linting` pack directory under `start`
+    $ vimpk move ale --pack linting
+      Moved ale to /Users/johndoe/.vim/pack/linting/start/ale.
+
+    # Will move to `opt`
+    $ vimpk move ale --opt
+      Moved ale to /Users/johndoe/.vim/pack/plugins/opt/ale.
+
+    # Will move to `start`
+    $ vimpk move ale --start
+      Moved ale to /Users/johndoe/.vim/pack/plugins/start/ale.
 
 #### Update all plugins
 

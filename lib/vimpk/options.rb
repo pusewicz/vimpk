@@ -54,6 +54,7 @@ module VimPK
         parser.separator ""
         parser.separator "Commands:"
         parser.separator "        i|install REPO/NAME [--opt|--start] [--pack=PATH] [--path=PATH] Install a package"
+        parser.separator "        mv|move                                                         Move a package"
         parser.separator "        u|update                                                        Update all packages"
         parser.separator "        rm|remove NAME                                                  Remove all occurrences of a package"
       end
