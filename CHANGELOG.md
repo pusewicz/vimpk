@@ -15,14 +15,14 @@
 * Make warnings yellow ([a573d15](https://www.github.com/pusewicz/vimpk/commit/a573d15826b7b8a97699c54cf003f93d77e4b2e3))
 * Remove error tag matcher ([82b2787](https://www.github.com/pusewicz/vimpk/commit/82b27876037b65acbd794565c9baa855027e5567))
 
-## [0.1.2] - 2024-03-15
+## [0.1.2](https://www.github.com/pusewicz/vimpk/compare/v0.1.1...v0.1.2) - 2024-03-15
 
 - General refactoring
 
-## [0.1.1] - 2024-03-15
+## [0.1.1](https://www.github.com/pusewicz/vimpk/compare/v0.1.0...v0.1.1) - 2024-03-15
 
 - Add support for `install` and `remove` commands which allow installing packages from GitHub and removing them from the pack.
 
-## [0.1.0] - 2024-03-15
+## 0.1.0 - 2024-03-15
 
 - Initial release
