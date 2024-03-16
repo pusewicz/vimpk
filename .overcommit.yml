@@ -18,8 +18,6 @@ CommitMsg:
     sample_message: "feat: Add new feature"
   TrailingPeriod:
     enabled: true
-  SpellCheck:
-    enabled: true
 
 PostCheckout:
   ALL:
