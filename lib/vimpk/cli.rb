@@ -13,7 +13,7 @@ module VimPK
       @command = determine_command
     rescue OptionParser::MissingArgument, OptionParser::InvalidOption => e
       puts e.message
-      abort("Use --help for usage information")
+      abort "Use --help for usage information"
     end
 
     def call
@@ -31,12 +31,15 @@ module VimPK
       case name
       when "i", "install"
         :install_command
+      when "mv", "move"
+        :move_command
       when "u", "update"
         :update_command
       when "rm", "remove"
         :remove_command
       else
-        raise ArgumentError, "Unknown command: #{name}"
+        puts colorize("Unknown command: #{name}", color: :red)
+        abort "Use --help for usage information"
       end
     end
 
@@ -53,6 +56,14 @@ module VimPK
       puts colorize("Error: #{e.message}", color: :red)
     rescue ArgumentError => e
       puts colorize("Error: #{e.message}", color: :red)
+    end
+
+    def move_command(name = nil)
+      move = Move.new(name, @options[:path], @options[:pack], @options[:type])
+      move.call
+      puts colorize("Moved #{name} to #{move.dest}.", color: :green)
+    rescue Move::PackageNotFoundError, Move::MultiplePackagesFoundError, ArgumentError => e
+      abort colorize(e.message, color: :red)
     end
 
     def update_command
@@ -106,7 +117,7 @@ module VimPK
       Remove.new(name, @options[:path]).call
 
       puts colorize("Package #{name} removed.", color: :green)
-    rescue ArgumentError, VimPK::Remove::PackageNotFound => e
+    rescue ArgumentError, VimPK::Remove::PackageNotFoundError => e
       abort colorize(e.message, color: :red)
     end
   end
