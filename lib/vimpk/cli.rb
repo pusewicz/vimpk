@@ -12,7 +12,7 @@ module VimPK
       @options = @parser.parse
       @command = determine_command
     rescue OptionParser::MissingArgument, OptionParser::InvalidOption => e
-      puts e.message
+      warn e.message
       abort "Use --help for usage information"
     end
 
@@ -38,7 +38,7 @@ module VimPK
       when "rm", "remove"
         :remove_command
       else
-        puts colorize("Unknown command: #{name}", color: :red)
+        warn colorize("Unknown command: #{name}", color: :red)
         abort "Use --help for usage information"
       end
     end
@@ -50,12 +50,12 @@ module VimPK
       install.call
       puts colorize("Installed #{package} to #{install.dest}. Took #{Time.now - time} seconds.", color: :green)
     rescue Git::GitError => e
-      puts colorize("Error: #{e.message}", color: :red)
+      warn colorize("Error: #{e.message}", color: :red)
       abort e.output.lines.map { |line| "  #{line}" }.join
     rescue Install::PackageExistsError => e
-      puts colorize("Error: #{e.message}", color: :red)
+      warn colorize("Error: #{e.message}", color: :red)
     rescue ArgumentError => e
-      puts colorize("Error: #{e.message}", color: :red)
+      warn colorize("Error: #{e.message}", color: :red)
     end
 
     def move_command(name = nil)
