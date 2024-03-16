@@ -1,0 +1,35 @@
+---
+gemfile: Gemfile
+
+PreCommit:
+  TrailingWhitespace:
+    enabled: true
+  YamlSyntax:
+    enabled: true
+
+CommitMsg:
+  CapitalizedSubject:
+    enabled: false
+  EmptyMessage:
+    enabled: true
+  MessageFormat:
+    enabled: true
+    pattern: "^(feat|fix|docs|style|refactor|perf|test|chore|revert)?: [A-Z].*"
+    sample_message: "feat: Add new feature"
+  TrailingPeriod:
+    enabled: true
+  SpellCheck:
+    enabled: true
+
+PostCheckout:
+  ALL:
+    quiet: true
+  BundleInstall:
+    enabled: true
+    quiet: true
+
+PrePush:
+  ALL:
+    quiet: true
+  Minitest:
+    enabled: true
