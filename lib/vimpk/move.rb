@@ -7,12 +7,12 @@ module VimPK
 
     attr_reader :dest
 
-    def initialize(name, path, pack = nil, type = nil)
+    def initialize(name, options)
       @name = name || raise(ArgumentError, "Package name is required")
       raise ArgumentError, "New pack or type is required" unless pack || type
-      @path = path
-      @pack = pack
-      @type = type
+      @path = options.path
+      @pack = options.pack
+      @type = options.type
     end
 
     def call

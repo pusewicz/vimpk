@@ -51,7 +51,7 @@ module VimPK
 
     def install_command(package = nil)
       time = Time.now
-      install = Install.new(package, @options[:path], @options[:pack], @options[:type])
+      install = Install.new(package, @options)
       puts "Installing #{package} to #{install.dest}…"
       install.call
       puts colorize("Installed #{package} to #{install.dest}. Took #{Time.now - time} seconds.", color: :green)
@@ -65,7 +65,7 @@ module VimPK
     end
 
     def move_command(name = nil)
-      move = Move.new(name, @options[:path], @options[:pack], @options[:type])
+      move = Move.new(name, @options)
       move.call
       puts colorize("Moved #{name} to #{move.dest}.", color: :green)
     rescue Move::PackageNotFoundError, Move::MultiplePackagesFoundError, ArgumentError => e
@@ -73,7 +73,7 @@ module VimPK
     end
 
     def update_command
-      update = Update.new(@options[:path])
+      update = Update.new(@options)
       puts "Updating #{update.plugins.size} packages in #{@options[:path]}…"
       start_time = Time.now
       update.call
@@ -120,7 +120,7 @@ module VimPK
     end
 
     def remove_command(name = nil)
-      Remove.new(name, @options[:path]).call
+      Remove.new(name, @options).call
 
       puts colorize("Package #{name} removed.", color: :green)
     rescue ArgumentError, VimPK::Remove::PackageNotFoundError => e

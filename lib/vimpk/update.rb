@@ -4,8 +4,8 @@ module VimPK
 
     attr_reader :jobs, :logs, :plugins
 
-    def initialize(path)
-      @pack_dir = File.expand_path(path)
+    def initialize(options)
+      @pack_dir = File.expand_path(options.path)
       @logs = Queue.new
       @pool = ThreadPool.new
       @plugins = Dir.glob(File.join(@pack_dir, "*", "{start,opt}", "*", ".git")).sort.map(&File.method(:dirname))
