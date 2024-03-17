@@ -9,8 +9,8 @@ module VimPK
     def initialize(package, options)
       @package = package || raise(ArgumentError, "Package name is required")
       @path = options.path
-      @pack = options.pack
-      @type = options.type
+      @pack = options.pack || options.default_pack
+      @type = options.type || options.default_type
       @dest = File.join(@path, @pack, @type, File.basename(@package))
       @source = "https://github.com/#{package}.git"
       @git = Git

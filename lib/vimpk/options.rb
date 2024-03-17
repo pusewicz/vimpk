@@ -10,11 +10,11 @@ module VimPK
     DEFAULT_TYPE = "start"
     DEFAULT_PACK = "plugins"
 
-    DefaultOptions = Struct.new(:path, :pack, :type)
+    DefaultOptions = Struct.new(:path, :pack, :type, :default_pack, :default_type)
 
     def initialize(argv)
       @argv = argv
-      @options = DefaultOptions.new(DEFAULT_PATH, DEFAULT_PACK, DEFAULT_TYPE)
+      @options = DefaultOptions.new(DEFAULT_PATH, nil, nil, DEFAULT_PACK, DEFAULT_TYPE)
 
       @parser = OptionParser.new do |parser|
         parser.banner = "Usage: #{parser.program_name} [options] [command [options]"
