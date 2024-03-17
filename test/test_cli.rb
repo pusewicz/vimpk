@@ -6,6 +6,8 @@ class TestCLI < Minitest::Test
   def test_valid_command
     assert_equal :install_command, VimPK::CLI.new(["i"]).command
     assert_equal :install_command, VimPK::CLI.new(["install"]).command
+    assert_equal :list_command, VimPK::CLI.new(["l"]).command
+    assert_equal :list_command, VimPK::CLI.new(["list"]).command
     assert_equal :move_command, VimPK::CLI.new(["mv"]).command
     assert_equal :move_command, VimPK::CLI.new(["move"]).command
     assert_equal :update_command, VimPK::CLI.new(["u"]).command
@@ -42,5 +44,19 @@ class TestCLI < Minitest::Test
     end
 
     assert_match(/Usage:/, out)
+  end
+
+  def test_call_list
+    using_pack_path do |path|
+      out, _err = capture_io do
+        exception = assert_raises(SystemExit) { VimPK::CLI.new(["list", "--path", path]).call }
+        assert_equal(0, exception.status)
+      end
+
+      assert_equal(<<~LIST, out)
+        #{path}/colors/opt/pretty
+        #{path}/plugins/start/someplug
+      LIST
+    end
   end
 end
