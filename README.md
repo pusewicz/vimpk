@@ -24,6 +24,20 @@ To use the gem, you can run the following command:
     $ vimpk install sainnhe/sonokai --pack colors --opt
       Installed sainnhe/sonokai to /Users/johndoe/.vim/pack/colors/opt/sonokai. Took 0.844782 seconds.
 
+#### List installed plugins
+
+    $ vimpk list
+    /Users/johndoe/.vim/pack/colors/opt/sonokai
+    /Users/johndoe/.vim/pack/plugins/start/ale
+
+    # List only opt packages
+    $ vimpk list --opt
+    /Users/johndoe/.vim/pack/colors/opt/sonokai
+
+    # List only plugins
+    $ vimpk list --pack plugins
+    /Users/johndoe/.vim/pack/plugins/start/ale
+
 #### Move a plugin
 
     # Will move to the `linting` pack directory under `start`
