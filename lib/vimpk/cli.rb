@@ -60,10 +60,10 @@ module VimPK
 
     def install_command(package = nil)
       time = Time.now
-      install = Install.new(package, @options)
-      puts "Installing #{package} to #{install.dest}…"
-      install.call
-      puts colorize("Installed #{package} to #{install.dest}. Took #{Time.now - time} seconds.", color: :green)
+      command = Install.new(package, @options)
+      puts "Installing #{package} to #{command.dest}…"
+      command.call
+      puts colorize("Installed #{package} to #{command.dest}. Took #{Time.now - time} seconds.", color: :green)
     rescue Git::GitError => e
       warn colorize("Error: #{e.message}", color: :yellow)
       abort e.output.lines.map { |line| "  #{line}" }.join
@@ -74,27 +74,27 @@ module VimPK
     end
 
     def move_command(name = nil)
-      move = Move.new(name, @options)
-      move.call
-      puts colorize("Moved #{name} to #{move.dest}.", color: :green)
+      command = Move.new(name, @options)
+      command.call
+      puts colorize("Moved #{name} to #{command.dest}.", color: :green)
     rescue Move::PackageNotFoundError, Move::MultiplePackagesFoundError, ArgumentError => e
       abort colorize(e.message, color: :red)
     end
 
     def update_command
-      update = Update.new(@options)
-      puts "Updating #{update.plugins.size} packages in #{@options[:path]}…"
+      command = Update.new(@options)
+      puts "Updating #{command.plugins.size} packages in #{@options[:path]}…"
       start_time = Time.now
-      update.call
+      command.call
 
       statuses = {}
 
-      while (log = update.logs.pop)
+      while (log = command.logs.pop)
         basename = log[:basename]
         statuses[basename] = log[:log]
       end
 
-      basenames = update.plugins.map { |dir| File.basename(dir) }.sort_by(&:downcase)
+      basenames = command.plugins.map { |dir| File.basename(dir) }.sort_by(&:downcase)
 
       max_name_length = statuses.keys.map(&:length).max
 
@@ -106,11 +106,11 @@ module VimPK
         end
       end
 
-      if statuses.size < update.jobs.size
-        puts "The remaining #{update.jobs.size - statuses.size} plugins are up to date."
+      if statuses.size < command.jobs.size
+        puts "The remaining #{command.jobs.size - statuses.size} plugins are up to date."
       end
 
-      puts colorize("Finished updating #{update.jobs.size} plugins. Took #{Time.now - start_time} seconds.")
+      puts colorize("Finished updating #{command.jobs.size} plugins. Took #{Time.now - start_time} seconds.")
 
       if statuses.size.nonzero?
         print "Display diffs? (Y/n) "
