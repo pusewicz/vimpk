@@ -1,5 +1,18 @@
 ## [Unreleased]
 
+## [0.4.0](https://www.github.com/pusewicz/vimpk/compare/v0.3.0...v0.4.0) (2024-03-17)
+
+
+### Features
+
+* Add support for the list command ([33e8dd1](https://www.github.com/pusewicz/vimpk/commit/33e8dd121161da46b27a0cf08906093ce17d7562))
+
+
+### Bug Fixes
+
+* Always exit 0 by default ([a0f6d90](https://www.github.com/pusewicz/vimpk/commit/a0f6d900807174eb192edb932fc4e1c58d198614))
+* Pass in the default values ([a413c69](https://www.github.com/pusewicz/vimpk/commit/a413c69fe52f27b25f25a02a93e9a96145ac3e49))
+
 ## [0.3.0](https://www.github.com/pusewicz/vimpk/compare/v0.2.0...v0.3.0) (2024-03-16)
 
 
