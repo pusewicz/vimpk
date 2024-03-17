@@ -19,6 +19,7 @@ module VimPK
     def call
       if @command
         send(@command, *@argv)
+        exit 0
       else
         puts @parser.parser
       end
@@ -37,6 +38,8 @@ module VimPK
       case name
       when "i", "install"
         :install_command
+      when "l", "list"
+        :list_command
       when "mv", "move"
         :move_command
       when "u", "update"
@@ -47,6 +50,12 @@ module VimPK
         warn colorize("Unknown command: #{name}", color: :yellow)
         abort help_message
       end
+    end
+
+    def list_command
+      command = List.new(@options)
+      list = command.call
+      puts list.sort_by(&:downcase)
     end
 
     def install_command(package = nil)
