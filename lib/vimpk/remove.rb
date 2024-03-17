@@ -4,9 +4,9 @@ module VimPK
   class Remove
     PackageNotFoundError = Class.new(StandardError)
 
-    def initialize(name, path)
+    def initialize(name, options)
       @name = name || raise(ArgumentError, "Package name is required")
-      @path = path
+      @path = options.path
     end
 
     def call
