@@ -6,7 +6,10 @@ require "etc"
 require_relative "vimpk/version"
 
 module VimPK
-  class Error < StandardError; end
+  Error = Class.new(StandardError)
+  PackageExistsError = Class.new(Error)
+  PackageNotFoundError = Class.new(Error)
+  MultiplePackagesFoundError = Class.new(Error)
 
   autoload :CLI, "vimpk/cli"
   autoload :Commands, "vimpk/commands"

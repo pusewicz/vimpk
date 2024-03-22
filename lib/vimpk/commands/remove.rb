@@ -3,8 +3,6 @@ require "fileutils"
 module VimPK
   module Commands
     class Remove
-      PackageNotFoundError = Class.new(StandardError)
-
       def initialize(name, options)
         @name = name || raise(ArgumentError, "Package name is required")
         @path = options.path

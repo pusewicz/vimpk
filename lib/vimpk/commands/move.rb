@@ -3,9 +3,6 @@ require "fileutils"
 module VimPK
   module Commands
     class Move
-      PackageNotFoundError = Class.new(StandardError)
-      MultiplePackagesFoundError = Class.new(StandardError)
-
       attr_reader :dest
 
       def initialize(name, options)

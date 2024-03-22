@@ -67,7 +67,7 @@ module VimPK
     rescue Git::GitError => e
       warn colorize("Error: #{e.message}", color: :yellow)
       abort e.output.lines.map { |line| "  #{line}" }.join
-    rescue Commands::Install::PackageExistsError => e
+    rescue PackageExistsError => e
       abort colorize("Error: #{e.message}", color: :red)
     rescue ArgumentError => e
       abort colorize("Error: #{e.message}", color: :red)
@@ -77,7 +77,7 @@ module VimPK
       command = Commands::Move.new(name, @options)
       command.call
       puts colorize("Moved #{name} to #{command.dest}.", color: :green)
-    rescue Commands::Move::PackageNotFoundError, Commands::Move::MultiplePackagesFoundError, ArgumentError => e
+    rescue PackageNotFoundError, MultiplePackagesFoundError, ArgumentError => e
       abort colorize(e.message, color: :red)
     end
 
@@ -136,7 +136,7 @@ module VimPK
       Commands::Remove.new(name, @options).call
 
       puts colorize("Package #{name} removed.", color: :green)
-    rescue ArgumentError, VimPK::Remove::PackageNotFoundError => e
+    rescue ArgumentError, PackageNotFoundError => e
       abort colorize(e.message, color: :red)
     end
   end
