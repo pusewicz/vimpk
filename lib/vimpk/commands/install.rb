@@ -3,8 +3,6 @@ module VimPK
     class Install
       include VimPK::Colorizer
 
-      PackageExistsError = Class.new(StandardError)
-
       attr_reader :dest
 
       def initialize(package, options)

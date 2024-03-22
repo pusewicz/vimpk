@@ -3,8 +3,6 @@ require "fileutils"
 module VimPK
   module Commands
     class List
-      PackageNotFoundError = Class.new(StandardError)
-
       attr_reader :dest
 
       def initialize(options)
