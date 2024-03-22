@@ -53,36 +53,36 @@ module VimPK
     end
 
     def list_command
-      command = List.new(@options)
+      command = Commands::List.new(@options)
       list = command.call
       puts list.sort_by(&:downcase)
     end
 
     def install_command(package = nil)
       time = Time.now
-      command = Install.new(package, @options)
+      command = Commands::Install.new(package, @options)
       puts "Installing #{package} to #{command.dest}…"
       command.call
       puts colorize("Installed #{package} to #{command.dest}. Took #{Time.now - time} seconds.", color: :green)
     rescue Git::GitError => e
       warn colorize("Error: #{e.message}", color: :yellow)
       abort e.output.lines.map { |line| "  #{line}" }.join
-    rescue Install::PackageExistsError => e
+    rescue Commands::Install::PackageExistsError => e
       abort colorize("Error: #{e.message}", color: :red)
     rescue ArgumentError => e
       abort colorize("Error: #{e.message}", color: :red)
     end
 
     def move_command(name = nil)
-      command = Move.new(name, @options)
+      command = Commands::Move.new(name, @options)
       command.call
       puts colorize("Moved #{name} to #{command.dest}.", color: :green)
-    rescue Move::PackageNotFoundError, Move::MultiplePackagesFoundError, ArgumentError => e
+    rescue Commands::Move::PackageNotFoundError, Commands::Move::MultiplePackagesFoundError, ArgumentError => e
       abort colorize(e.message, color: :red)
     end
 
     def update_command
-      command = Update.new(@options)
+      command = Commands::Update.new(@options)
       puts "Updating #{command.plugins.size} packages in #{@options[:path]}…"
       start_time = Time.now
       command.call
@@ -129,7 +129,7 @@ module VimPK
     end
 
     def remove_command(name = nil)
-      Remove.new(name, @options).call
+      Commands::Remove.new(name, @options).call
 
       puts colorize("Package #{name} removed.", color: :green)
     rescue ArgumentError, VimPK::Remove::PackageNotFoundError => e

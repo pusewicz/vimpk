@@ -1,6 +1,7 @@
 module VimPK
   class ThreadPool
     def initialize(size = Etc.nprocessors * 2)
+      Thread.abort_on_exception = true
       @size = size
       @jobs = Queue.new
       @workers = Array.new(size) do
