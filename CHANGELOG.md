@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## [0.5.0](https://www.github.com/pusewicz/vimpk/compare/v0.4.0...v0.5.0) (2024-03-22)
+
+
+### Features
+
+* Use less pager for output of the update ([0df050c](https://www.github.com/pusewicz/vimpk/commit/0df050c9cf4a32ca1c8a56fb23e6d62b80b90e1c))
+
 ## [0.4.0](https://www.github.com/pusewicz/vimpk/compare/v0.3.0...v0.4.0) (2024-03-17)
 
 
