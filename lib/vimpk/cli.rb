@@ -121,8 +121,12 @@ module VimPK
           puts
           puts "Displaying diffs…"
 
-          statuses.each do |basename, status|
-            puts status.lines.map { |line| "#{basename}: #{colorize_diff line}" }.join
+          IO.popen("less", "w") do |io|
+            statuses.each do |basename, status|
+              status.lines.each do |line|
+                io.puts "#{basename}: #{colorize_diff line}"
+              end
+            end
           end
         end
       end
