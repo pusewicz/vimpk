@@ -1,5 +1,17 @@
 ## [Unreleased]
 
+## [0.6.0](https://www.github.com/pusewicz/vimpk/compare/v0.5.0...v0.6.0) (2024-03-29)
+
+
+### Features
+
+* Use color when piping to less ([65edc77](https://www.github.com/pusewicz/vimpk/commit/65edc77faefab4208f4aa1e1d4e2f04f97d3d671))
+
+
+### Bug Fixes
+
+* Display lines as they are ([1d42677](https://www.github.com/pusewicz/vimpk/commit/1d42677403ed95633ccecdbb5a68beb36f06380c))
+
 ## [0.5.0](https://www.github.com/pusewicz/vimpk/compare/v0.4.0...v0.5.0) (2024-03-22)
 
 
