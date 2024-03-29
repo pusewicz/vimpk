@@ -126,7 +126,7 @@ module VimPK
           IO.popen(["less", *options], "w") do |io|
             statuses.each do |basename, status|
               status.lines.each do |line|
-                io.puts "#{basename}: #{colorize_diff line}"
+                io.print "#{basename}: #{colorize_diff line}"
               end
             end
           end
