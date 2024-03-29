@@ -121,7 +121,9 @@ module VimPK
           puts
           puts "Displaying diffs…"
 
-          IO.popen("less", "w") do |io|
+          options = ENV["NO_COLOR"] ? [] : %w[--use-color -R]
+
+          IO.popen(["less", *options], "w") do |io|
             statuses.each do |basename, status|
               status.lines.each do |line|
                 io.puts "#{basename}: #{colorize_diff line}"
