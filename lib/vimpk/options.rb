@@ -6,7 +6,7 @@ module VimPK
   class Options
     attr_reader :options, :parser
 
-    DEFAULT_PATH = File.expand_path("~/.vim/pack").freeze
+    DEFAULT_PATH = File.expand_path("~/.config/vim/pack").freeze
     DEFAULT_TYPE = "start"
     DEFAULT_PACK = "plugins"
 
