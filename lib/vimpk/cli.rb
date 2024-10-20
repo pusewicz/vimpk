@@ -134,10 +134,12 @@ module VimPK
       end
     end
 
-    def remove_command(name = nil)
-      Commands::Remove.new(name, @options).call
+    def remove_command(*names)
+      names.each do |name|
+        Commands::Remove.new(name, @options).call
 
-      puts colorize("Package #{name} removed.", color: :green)
+        puts colorize("Package #{name} removed.", color: :green)
+      end
     rescue ArgumentError, PackageNotFoundError => e
       abort colorize(e.message, color: :red)
     end
