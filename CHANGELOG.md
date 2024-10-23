@@ -1,5 +1,13 @@
 ## [Unreleased]
 
+## [0.7.0](https://www.github.com/pusewicz/vimpk/compare/v0.6.0...v0.7.0) (2024-10-23)
+
+
+### Features
+
+* New default config location ([9afc12f](https://www.github.com/pusewicz/vimpk/commit/9afc12f4fc025b1b27e074546ae6755530553ed3))
+* Support removing multiple packages ([83d3b12](https://www.github.com/pusewicz/vimpk/commit/83d3b12eed4c35ff9f01b961e4eebdcc3f4794b6))
+
 ## [0.6.0](https://www.github.com/pusewicz/vimpk/compare/v0.5.0...v0.6.0) (2024-03-29)
 
 
