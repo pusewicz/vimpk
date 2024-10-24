@@ -1,0 +1,11 @@
+# Generated from lib/vimpk/commands/remove.rb with RBS::Inline
+
+module VimPK
+  module Commands
+    class Remove
+      def initialize: (untyped name, untyped options) -> untyped
+
+      def call: () -> untyped
+    end
+  end
+end

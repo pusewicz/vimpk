@@ -1,0 +1,29 @@
+# Generated from lib/vimpk/cli.rb with RBS::Inline
+
+module VimPK
+  class CLI
+    include Colorizer
+
+    attr_reader command: untyped
+
+    def initialize: (untyped argv) -> untyped
+
+    def call: () -> untyped
+
+    private
+
+    def help_message: () -> untyped
+
+    def determine_command: () -> untyped
+
+    def list_command: () -> untyped
+
+    def install_command: (?untyped package) -> untyped
+
+    def move_command: (?untyped name) -> untyped
+
+    def update_command: () -> untyped
+
+    def remove_command: (?untyped name) -> untyped
+  end
+end

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+# rbs_inline: enabled
+
 module VimPK
   class ThreadPool
     def initialize(size = Etc.nprocessors * 2)

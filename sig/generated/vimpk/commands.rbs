@@ -1,0 +1,6 @@
+# Generated from lib/vimpk/commands.rb with RBS::Inline
+
+module VimPK
+  module Commands
+  end
+end

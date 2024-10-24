@@ -8,4 +8,4 @@ gem "rake", require: false
 gem "minitest", require: false
 gem "overcommit", require: false
 gem "standard", require: false
-gem "rbs-inline"
+gem "rbs-inline", require: false

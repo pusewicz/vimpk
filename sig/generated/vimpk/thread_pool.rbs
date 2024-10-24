@@ -1,0 +1,11 @@
+# Generated from lib/vimpk/thread_pool.rb with RBS::Inline
+
+module VimPK
+  class ThreadPool
+    def initialize: (?untyped size) -> untyped
+
+    def schedule: (untyped job) -> untyped
+
+    def shutdown: () -> untyped
+  end
+end

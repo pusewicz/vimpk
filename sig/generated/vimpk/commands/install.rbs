@@ -1,0 +1,15 @@
+# Generated from lib/vimpk/commands/install.rb with RBS::Inline
+
+module VimPK
+  module Commands
+    class Install
+      include VimPK::Colorizer
+
+      attr_reader dest: untyped
+
+      def initialize: (untyped package, untyped options) -> untyped
+
+      def call: () -> untyped
+    end
+  end
+end

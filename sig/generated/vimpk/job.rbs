@@ -1,0 +1,9 @@
+# Generated from lib/vimpk/job.rb with RBS::Inline
+
+module VimPK
+  class Job
+    def initialize: (untyped dir, untyped logs) -> untyped
+
+    def call: () -> untyped
+  end
+end

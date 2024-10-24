@@ -1,0 +1,11 @@
+# Generated from lib/vimpk.rb with RBS::Inline
+
+module VimPK
+  Error: untyped
+
+  PackageExistsError: untyped
+
+  PackageNotFoundError: untyped
+
+  MultiplePackagesFoundError: untyped
+end

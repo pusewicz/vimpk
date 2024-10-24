@@ -1,0 +1,11 @@
+# Generated from lib/vimpk/colorizer.rb with RBS::Inline
+
+module VimPK
+  module Colorizer
+    private
+
+    def colorize_diff: (untyped line) -> untyped
+
+    def colorize: (untyped text, ?color: untyped) -> untyped
+  end
+end

@@ -1,0 +1,19 @@
+# Generated from lib/vimpk/commands/update.rb with RBS::Inline
+
+module VimPK
+  module Commands
+    class Update
+      include VimPK::Colorizer
+
+      attr_reader jobs: untyped
+
+      attr_reader logs: untyped
+
+      attr_reader plugins: untyped
+
+      def initialize: (untyped options) -> untyped
+
+      def call: () -> untyped
+    end
+  end
+end

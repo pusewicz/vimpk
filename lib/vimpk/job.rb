@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+# rbs_inline: enabled
+
 module VimPK
   class Job
     def initialize(dir, logs)

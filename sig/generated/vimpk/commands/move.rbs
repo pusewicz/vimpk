@@ -1,0 +1,13 @@
+# Generated from lib/vimpk/commands/move.rb with RBS::Inline
+
+module VimPK
+  module Commands
+    class Move
+      attr_reader dest: untyped
+
+      def initialize: (untyped name, untyped options) -> untyped
+
+      def call: () -> untyped
+    end
+  end
+end

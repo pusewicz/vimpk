@@ -1,0 +1,36 @@
+# Generated from lib/vimpk/git.rb with RBS::Inline
+
+module VimPK
+  module Git
+    class GitError < StandardError
+      attr_reader output: String
+
+      # @rbs message: String
+      # @rbs output: String
+      def initialize: (String message, String output) -> void
+    end
+
+    # @rbs dir: String
+    def branch: (?dir: String) -> String
+
+    # @rbs branch: String
+    # @rbs dir: String
+    def log: (String branch, ?dir: String) -> String
+
+    # @rbs branch: String
+    # @rbs dir: String
+    def fetch: (String branch, ?dir: String) -> String
+
+    # @rbs dir: String -> String
+    def pull: (?dir: String) -> String
+
+    # @rbs source: String
+    # @rbs dest: String
+    # @rbs dir: String
+    def clone: (String source, String dest, ?dir: String) -> String
+
+    # @rbs args: String
+    # @rbs dir: String
+    def command: (String args, ?dir: String) -> String
+  end
+end

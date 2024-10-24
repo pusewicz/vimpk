@@ -1,0 +1,34 @@
+# Generated from lib/vimpk/options.rb with RBS::Inline
+
+module VimPK
+  class Options
+    attr_reader options: untyped
+
+    attr_reader parser: untyped
+
+    DEFAULT_PATH: untyped
+
+    DEFAULT_TYPE: ::String
+
+    DEFAULT_PACK: ::String
+
+    class DefaultOptions < Struct[untyped]
+      attr_accessor path(): untyped
+
+      attr_accessor pack(): untyped
+
+      attr_accessor type(): untyped
+
+      attr_accessor default_pack(): untyped
+
+      attr_accessor default_type(): untyped
+
+      def self.new: (?untyped path, ?untyped pack, ?untyped type, ?untyped default_pack, ?untyped default_type) -> instance
+                  | (?path: untyped, ?pack: untyped, ?type: untyped, ?default_pack: untyped, ?default_type: untyped) -> instance
+    end
+
+    def initialize: (untyped argv) -> untyped
+
+    def parse: () -> untyped
+  end
+end

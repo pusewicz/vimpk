@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+# rbs_inline: enabled
+
 module VimPK
   module Commands
     autoload :Install, "vimpk/commands/install"
