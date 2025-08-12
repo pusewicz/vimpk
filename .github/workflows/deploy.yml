@@ -20,7 +20,7 @@ jobs:
           package-name: vimpk
           bump-minor-pre-major: true
           version-file: "lib/vimpk/version.rb"
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         if: ${{ steps.release.outputs.release_created }}
       - uses: ruby/setup-ruby@v1
         with:
