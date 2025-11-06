@@ -28,7 +28,7 @@ module VimPK
 
       # Print initial list
       @plugins.each do |name|
-        print_status_line(name)
+        puts format_status_line(name)
       end
     end
 
@@ -44,11 +44,11 @@ module VimPK
       # Move cursor up to the plugin's line
       print "\e[#{lines_to_move_up}A" if lines_to_move_up > 0
 
-      # Clear line and reprint
+      # Clear line and reprint without newline
       print "\r\e[K"
-      print_status_line(name)
+      print format_status_line(name)
 
-      # Move cursor back down
+      # Move cursor back down to home position (one line past the last plugin)
       print "\e[#{lines_to_move_up}B" if lines_to_move_up > 0
     end
 
@@ -66,7 +66,7 @@ module VimPK
 
     private
 
-    def print_status_line(name)
+    def format_status_line(name)
       status = @statuses[name]
       status_info = STATUSES[status]
 
@@ -76,9 +76,9 @@ module VimPK
 
       if @use_colors
         colored_text = colorize(text, color: status_info[:color])
-        puts "#{formatted_name}  [#{symbol}] #{colored_text}"
+        "#{formatted_name}  [#{symbol}] #{colored_text}"
       else
-        puts "#{formatted_name}  [#{symbol}] #{text}"
+        "#{formatted_name}  [#{symbol}] #{text}"
       end
     end
   end
