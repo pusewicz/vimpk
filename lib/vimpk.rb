@@ -17,5 +17,6 @@ module VimPK
   autoload :Git, "vimpk/git"
   autoload :Job, "vimpk/job"
   autoload :Options, "vimpk/options"
+  autoload :ProgressDisplay, "vimpk/progress_display"
   autoload :ThreadPool, "vimpk/thread_pool"
 end
