@@ -84,35 +84,30 @@ module VimPK
     def update_command
       command = Commands::Update.new(@options)
       puts "Updating #{command.plugins.size} packages in #{@options[:path]}…"
+      puts
       start_time = Time.now
       command.call
 
+      # Collect update logs
       statuses = {}
-
       while (log = command.logs.pop)
         basename = log[:basename]
         statuses[basename] = log[:log]
       end
 
-      basenames = command.plugins.map { |dir| File.basename(dir) }.sort_by(&:downcase)
+      # Show summary
+      puts
+      puts colorize("Finished updating #{command.plugins.size} plugins. Took #{(Time.now - start_time).round(2)} seconds.", color: :green)
 
-      max_name_length = statuses.keys.map(&:length).max
-
-      basenames.each do |basename|
-        if statuses[basename]
-          formatted_name = basename.rjust(max_name_length)
-          formatted_status = colorize("Updated!", color: :green)
-          puts "#{formatted_name}: #{formatted_status}"
-        end
+      if statuses.any?
+        puts colorize("#{statuses.size} plugin(s) updated, #{command.plugins.size - statuses.size} up to date.", color: :green)
+      else
+        puts colorize("All plugins are up to date.", color: :green)
       end
 
-      if statuses.size < command.jobs.size
-        puts "The remaining #{command.jobs.size - statuses.size} plugins are up to date."
-      end
-
-      puts colorize("Finished updating #{command.jobs.size} plugins. Took #{Time.now - start_time} seconds.")
-
-      if statuses.size.nonzero?
+      # Optionally display diffs
+      if statuses.any?
+        puts
         print "Display diffs? (Y/n) "
 
         answer = $stdin.getch
@@ -130,6 +125,8 @@ module VimPK
               end
             end
           end
+        else
+          puts
         end
       end
     end
