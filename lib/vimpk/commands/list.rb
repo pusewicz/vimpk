@@ -1,23 +1,29 @@
-require "fileutils"
-
 module VimPK
   module Commands
     class List
-      attr_reader :dest
-
       def initialize(options)
         @path = options.path
-        @pack = options.pack || "*"
-        @type = options.type || "{start,opt}"
+        @pack = options.pack
+        @type = options.type
+        @manifest = Manifest.new(@path)
       end
 
       def call
-        pattern = File.join(@path, @pack, @type, "*")
-        glob = Dir.glob(pattern)
+        results = []
 
-        raise PackageNotFoundError, "No packages were found in #{pattern}." if glob.empty?
+        @manifest.each do |name, data|
+          # Apply filters
+          next if @pack && data["pack"] != @pack
+          next if @type && data["type"] != @type
 
-        glob
+          # Construct the path from manifest data
+          path = File.join(@path, data["pack"], data["type"], name)
+          results << path
+        end
+
+        raise PackageNotFoundError, "No packages found." if results.empty?
+
+        results
       end
     end
   end

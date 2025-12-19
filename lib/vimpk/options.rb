@@ -58,6 +58,7 @@ module VimPK
         parser.separator "        mv|move NAME [--opt|--start] [--pack=PATH]                      Move a package"
         parser.separator "        u|update                                                        Update all packages"
         parser.separator "        rm|remove NAME                                                  Remove all occurrences of a package"
+        parser.separator "        sync                                                            Sync manifest with installed plugins"
       end
     end
 

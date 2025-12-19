@@ -15,6 +15,14 @@ module VimPK
       command("rev-parse --abbrev-ref HEAD", dir: dir)
     end
 
+    def commit(dir: Dir.pwd)
+      command("rev-parse HEAD", dir: dir)
+    end
+
+    def remote_url(dir: Dir.pwd)
+      command("remote get-url origin", dir: dir)
+    end
+
     def log(branch, dir: Dir.pwd)
       command("log -p --full-diff HEAD..origin/#{branch}", dir: dir)
     end

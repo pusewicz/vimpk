@@ -46,6 +46,8 @@ module VimPK
         :update_command
       when "rm", "remove"
         :remove_command
+      when "sync"
+        :sync_command
       else
         warn colorize("Unknown command: #{name}", color: :yellow)
         abort help_message
@@ -139,6 +141,30 @@ module VimPK
       end
     rescue ArgumentError, PackageNotFoundError => e
       abort colorize(e.message, color: :red)
+    end
+
+    def sync_command
+      puts "Syncing manifest with installed plugins..."
+      command = Commands::Sync.new(@options)
+      result = command.call
+
+      if result[:added].any?
+        puts colorize("Added #{result[:added].size} plugin(s): #{result[:added].join(", ")}", color: :green)
+      end
+
+      if result[:updated].any?
+        puts colorize("Updated #{result[:updated].size} plugin(s)", color: :green)
+      end
+
+      if result[:removed].any?
+        puts colorize("Removed #{result[:removed].size} plugin(s) from manifest: #{result[:removed].join(", ")}", color: :yellow)
+      end
+
+      if result[:added].empty? && result[:updated].empty? && result[:removed].empty?
+        puts colorize("Manifest is already in sync.", color: :green)
+      else
+        puts colorize("Manifest synced successfully.", color: :green)
+      end
     end
   end
 end

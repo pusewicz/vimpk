@@ -16,6 +16,7 @@ module VimPK
   autoload :Colorizer, "vimpk/colorizer"
   autoload :Git, "vimpk/git"
   autoload :Job, "vimpk/job"
+  autoload :Manifest, "vimpk/manifest"
   autoload :Options, "vimpk/options"
   autoload :ProgressDisplay, "vimpk/progress_display"
   autoload :ThreadPool, "vimpk/thread_pool"

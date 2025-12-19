@@ -14,6 +14,7 @@ class TestCLI < Minitest::Test
     assert_equal :update_command, VimPK::CLI.new(["update"]).command
     assert_equal :remove_command, VimPK::CLI.new(["rm"]).command
     assert_equal :remove_command, VimPK::CLI.new(["remove"]).command
+    assert_equal :sync_command, VimPK::CLI.new(["sync"]).command
   end
 
   def test_invalid_command
@@ -48,6 +49,20 @@ class TestCLI < Minitest::Test
 
   def test_call_list
     using_pack_path do |path|
+      # Create a manifest for the test fixtures
+      manifest = VimPK::Manifest.new(path)
+      manifest.add("pretty", {
+        remote_url: "https://github.com/example/pretty.git",
+        pack: "colors",
+        type: "opt"
+      })
+      manifest.add("someplug", {
+        remote_url: "https://github.com/example/someplug.git",
+        pack: "plugins",
+        type: "start"
+      })
+      manifest.save
+
       out, _err = capture_io do
         exception = assert_raises(SystemExit) { VimPK::CLI.new(["list", "--path", path]).call }
         assert_equal(0, exception.status)

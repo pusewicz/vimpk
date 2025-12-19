@@ -11,6 +11,7 @@ module VimPK
         @path = options.path
         @pack = options.pack
         @type = options.type
+        @manifest = Manifest.new(@path)
       end
 
       def call
@@ -24,7 +25,9 @@ module VimPK
           source = glob.first
           current_type = File.basename(File.dirname(source))
           current_pack = File.basename(File.dirname(File.dirname(source)))
-          @dest = File.join(@path, @pack || current_pack, @type || current_type, @name)
+          new_pack = @pack || current_pack
+          new_type = @type || current_type
+          @dest = File.join(@path, new_pack, new_type, @name)
 
           if File.exist?(dest)
             raise ArgumentError, "Package #{@name} already exists in #{dest}."
@@ -33,7 +36,19 @@ module VimPK
           end
 
           FileUtils.mv(source, dest)
+          update_manifest(new_pack, new_type)
         end
+      end
+
+      private
+
+      def update_manifest(pack, type)
+        @manifest.update(@name, {
+          pack: pack,
+          type: type,
+          updated_at: Time.now.utc.iso8601
+        })
+        @manifest.save
       end
     end
   end

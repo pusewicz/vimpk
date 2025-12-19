@@ -6,6 +6,7 @@ module VimPK
       def initialize(name, options)
         @name = name || raise(ArgumentError, "Package name is required")
         @path = options.path
+        @manifest = Manifest.new(@path)
       end
 
       def call
@@ -17,6 +18,8 @@ module VimPK
           glob.each do |dir|
             FileUtils.rm_rf(dir)
           end
+          @manifest.remove(@name)
+          @manifest.save
         end
       end
     end
