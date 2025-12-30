@@ -1,5 +1,19 @@
 ## [Unreleased]
 
+## [0.7.0](https://www.github.com/pusewicz/vimpk/compare/v0.6.0...v0.7.0) (2025-12-30)
+
+
+### Features
+
+* Add real-time progress indicator for update command ([cebac69](https://www.github.com/pusewicz/vimpk/commit/cebac69858eb6a30e683ea56420ee4c196629cd7))
+* New default config location ([9afc12f](https://www.github.com/pusewicz/vimpk/commit/9afc12f4fc025b1b27e074546ae6755530553ed3))
+* Support removing multiple packages ([83d3b12](https://www.github.com/pusewicz/vimpk/commit/83d3b12eed4c35ff9f01b961e4eebdcc3f4794b6))
+
+
+### Bug Fixes
+
+* Fix duplicate line issue in progress display ([7068a38](https://www.github.com/pusewicz/vimpk/commit/7068a384a32ce3d209d685ff574820e073d38d29))
+
 ## [0.6.0](https://www.github.com/pusewicz/vimpk/compare/v0.5.0...v0.6.0) (2024-03-29)
 
 
